@@ -9,24 +9,21 @@ class Home extends Component { 
         }
     }
 
+    componentDidMount(){
+        setTimeout(() => { 
+            this.setState({
+                name: 'Jaqueline'
+            })
+        }, 1000)
+    }
+    
     render(){
-        //Style object 
-        const buttonStyle = {
-            backgroundColor: 'gray',
-            border: '1px solid black'
-        }
+
+        console.log("Name: ", this.state.name)
 
         return(
             <div className="Home">
-                <h1>Welcome to CodeJobs</h1>
-                <p>
-                    In this recipe you will learn how to add styles 
-                    to components.
-                    <a href="http://youtube.com/codejobs">Codejobs</a>.
-                </p>
-                <p>
-                    <button style={buttonStyle}>click me! </button>
-                </p>
+                <p>Hi my name is {this.state.name}</p>
             </div>
         )
     }
