@@ -13,7 +13,12 @@ import Coins from './Coins/Coins'
 import Notes from './Notes/Notes'
 import Chart from './Chart/Chart'
 import Animation from './Animation/Animation'
+import Numbers from './Numbers/Numbers'
+
+// Styles
 import './App.css';
+
+// Data
 import { notes1, notes2 } from './Notes/data'
 class App extends Component {
   constructor(props){
@@ -69,6 +74,7 @@ class App extends Component {
 				<button onClick={this.setLineChart}>Line</button>
 			</p>
 			<Animation />
+			<Numbers />
         </Content>
         <Footer />
       </div>
