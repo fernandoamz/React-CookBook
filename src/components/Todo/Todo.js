@@ -51,7 +51,6 @@ class Todo extends Component {
                 items: [
                     ...this.state.items,
                     {
-                        id: uuidv4(),
                         task: this.state.task,
                         completed: false
                     }
