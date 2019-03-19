@@ -28,12 +28,25 @@
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>
-    <div id="unmountMessage">There is no mounted component!</div>
-    <button 
+    <script>
+        //Detect the user device
+        const isMobile = /iPhone|Android/i.test(navigator.userAgent);
+        //Creating our initial State
+        const initialState = {
+            device: {
+                isMobile
+            }
+        }
+
+        //Saving our initial state to the window object
+        window.initialState = initialState;
+    </script>
+    <!--div id="unmountMessage">There is no mounted component!</div>
+    <button
 	  id="unmount"
 	  style="margin: 0 auto; display: block; background: red; color: white;"
     >
 		unmount
-    </button>
+    </button-->
   </body>
 </html>

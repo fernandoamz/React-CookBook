@@ -1,23 +1,30 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import './index.css';
-import App from './components/App';
-import * as serviceWorker from './serviceWorker';
 
-const unmountButton = document.getElementById('unmount'); 
+// Redux Store
+import configureStore from './shared/redux/configureStore';
 
-function unmount(){
-    ReactDOM.unmountComponentAtNode(
-        document.getElementById('root')
-    )
+// Routes
+import AppRoutes from './routes';
 
-    document.getElementById('unmountMessage')
-    .style.display = 'block'
-    unmountButton.remove()
-}
+// Configuring redux store
+const store = configureStore(window.initialState);
 
-unmountButton.addEventListener('click', unmount)
-document.getElementById('unmountMessage').style.display = 'none'
+// DOM
+const rootElement = document.getElementById('root');
 
-ReactDOM.render(<App />, document.getElementById('root'));
-serviceWorker.unregister();
+const renderApp = Component => {
+  render(
+    <Provider store={store}>
+      <Router>
+         <Component />
+       </Router>
+    </Provider>,
+    rootElement
+  );
+};
+
+renderApp(AppRoutes);

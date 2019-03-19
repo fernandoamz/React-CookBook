@@ -1,47 +1,47 @@
 import React, { Component } from 'react';
+import { array } from 'prop-types';
+
+// Utils
+import { isFirstRender } from '../../shared/utils/frontend';
+
 import './Coins.css'
 
-class Coins extends Component { 
-    constructor(){
-        super()
-        this.state = {
-            dollars: 0
+class Coins extends Component {
+    static propTypes = {
+        coins: array
+    }
+
+    componentWillMount() {
+        const { fetchCoins } = this.props
+
+        // Fetching coins action.
+        fetchCoins();
+    }
+
+    render() {
+        const { coins: { coins } } = this.props;
+        // If the coins const is an array empty
+        // then we return null
+        console.log(coins.payload)
+        if (isFirstRender(coins)) {
+            return null
         }
-    }
 
-    /*shouldComponentUpdate(props, state){
-        // We only update if the dollars are multiple of 10
-        return state.dollars % 10 === 0
-    } */
-
-    handleOnChange = e => {
-        this.setState({
-            dollars: Number(e.target.value || 0)
-        })
-    }
-
-    render(){
-        return(
+        return (
             <div className="Coins">
-                <h1>Buy Crypto Coins!</h1>
-                <div className="question">
-                    <p>How much dollars do you have ?</p>
-                    <p>
-                        <input 
-                            placeholder="0"
-                            onChange={this.handleOnChange}
-                            type="text"
-                        />
-                    </p>
-                </div>
-
-                <div className="answer">
-                    <p>Crypto Coin price: $10</p>
-                    <p>
-                        You can buy <strong>{this.state.dollars / 10}</strong> coins.
-                    </p>
-                </div>
+                <h1>Top 100 Coins</h1>
+                <ul>
+                    {coins.payload.map((coin, key) => (
+                        <li key={key}>
+                            <span className="left">
+                                {coin.book}
+                            </span>
+                            <span className="right">${coin.maximum_amount}</span>
+                        </li>
+                    ))}
+                </ul>
             </div>
+
         )
     }
 }
